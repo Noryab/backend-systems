@@ -3,7 +3,7 @@ import os
 
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "my_precious_secret_key")
-    ENV = "dev"
+    ENV = "development"
     DEBUG = True
     JSON_SORT_KEYS = False
     POSTGRES_CONFIGURATION = {
@@ -23,15 +23,14 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    ENV = "dev"
+    ENV = "development"
     JSON_SORT_KEYS = False
     COLLECTION_USER_ACTION_LOGS = "devUserActionLogs"
     LOG_LEVEL = "DEBUG"
 
 
-
 class LocalDevelopmentConfig(Config):
-    ENV = "dev"
+    ENV = "local"
     JSON_SORT_KEYS = False
     COLLECTION_USER_ACTION_LOGS = "devUserActionLogs"
     LOG_LEVEL = "DEBUG"
@@ -46,17 +45,17 @@ class TesConfig(Config):
 
 class ProductionConfig(Config):
     DEBUG = False
-    ENV = "prod"
+    ENV = "production"
     JSON_SORT_KEYS = False
     COLLECTION_USER_ACTION_LOGS = "userActionLogs"
     LOG_LEVEL = "INFO"
 
 
 config_by_name = dict(
-    dev=DevelopmentConfig,
+    development=DevelopmentConfig,
     test=TesConfig,
-    loc=LocalDevelopmentConfig,
-    prod=ProductionConfig,
+    local=LocalDevelopmentConfig,
+    production=ProductionConfig,
 )
 
 key = Config.SECRET_KEY

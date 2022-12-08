@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 
-class Room(Base):
+class Entity(Base):
     __tablename__ = "room"
 
     id = Column(Integer, primary_key=True)

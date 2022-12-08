@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from rentomatic.domain import room
-from rentomatic.repository.postgres_objects import Base, Room
+from view.v1.domain import entity_1
+from view.v1.infrastructure.postgres_objects import Base, Entity
 
 
 class PostgresRepo:
@@ -21,7 +21,7 @@ class PostgresRepo:
 
     def _create_room_objects(self, results):
         return [
-            room.Room(
+            Entity.Room(
                 code=q.code,
                 size=q.size,
                 price=q.price,
@@ -35,21 +35,21 @@ class PostgresRepo:
         DBSession = sessionmaker(bind=self.engine)
         session = DBSession()
 
-        query = session.query(Room)
+        query = session.query(Entity)
 
         if filters is None:
             return self._create_room_objects(query.all())
 
         if "code__eq" in filters:
-            query = query.filter(Room.code == filters["code__eq"])
+            query = query.filter(Entity.code == filters["code__eq"])
 
         if "price__eq" in filters:
-            query = query.filter(Room.price == filters["price__eq"])
+            query = query.filter(Entity.price == filters["price__eq"])
 
         if "price__lt" in filters:
-            query = query.filter(Room.price < filters["price__lt"])
+            query = query.filter(Entity.price < filters["price__lt"])
 
         if "price__gt" in filters:
-            query = query.filter(Room.price > filters["price__gt"])
+            query = query.filter(Entity.price > filters["price__gt"])
 
         return self._create_room_objects(query.all())

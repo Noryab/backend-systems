@@ -1,4 +1,4 @@
-from rentomatic.domain.room import Room
+from view.v1.domain.entity_1 import Entity
 
 
 class MemRepo:
@@ -7,7 +7,7 @@ class MemRepo:
 
     def list(self, filters=None):
 
-        result = [Room.from_dict(i) for i in self.data]
+        result = [Entity.from_dict(i) for i in self.data]
 
         if filters is None:
             return result
