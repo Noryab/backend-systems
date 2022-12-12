@@ -6,7 +6,9 @@ from manage import read_json_configuration
 
 @pytest.fixture
 def app():
-    app = create_app("testi")
+    '''Returns a object of Flask with env=test'''
+
+    app = create_app("test")
 
     return app
 

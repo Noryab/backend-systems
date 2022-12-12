@@ -30,7 +30,7 @@ class Service1:
             longitude=input["longitude"],
             latitude=input["latitude"],
         )
-        response = repository.insert()
+        response = repository.list()
 
         print(response["result"])
         data = json.dumps(response["result"], cls=RefrigeratorEncoder)

@@ -20,7 +20,7 @@ logging.info(flask.__version__)
 def create_app(config_name: str) -> Flask:    
     app = Flask(__name__)
     app.config.from_object(config_by_name[config_name])
-    MongoRepo().init(config_by_name[config_name].MONGO_CONFIGURATION)
+    MongoRepo().init(config_by_name[config_name])
 
     CORS(app)
     return app

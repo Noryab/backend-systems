@@ -20,7 +20,9 @@ class Config:
     "MONGODB_PASSWORD": os.environ.get("POSTGRES_PORT", "noryab"),    
     "APPLICATION_DB":os.environ.get("POSTGRES_PORT", "local"),   
 }
-
+    MONGODB_HOSTNAME =os.environ.get("POSTGRES_USER", "localhost"),
+    MONGODB_PORT = os.environ.get("POSTGRES_PASSWORD", 27017)
+    APPLICATION_DB = os.environ.get("POSTGRES_PORT", "local")
 
 class DevelopmentConfig(Config):
     ENV = "development"
