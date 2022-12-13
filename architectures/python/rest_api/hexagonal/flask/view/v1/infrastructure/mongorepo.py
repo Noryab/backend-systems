@@ -40,3 +40,22 @@ class MongoRepo(BaseMongoRepoitory):
             result = collection.find(mongo_filter)
         response = dict(status=True, result=self._create_entity_objects(result))        
         return response
+
+    def insert(self, entity, filters=None):
+        collection = self.db.refrigerators        
+
+        if filters is None:
+            result = collection.find_one()
+        else:
+            mongo_filter = {}
+            for key, value in filters.items():
+                key, operator = key.split("__")
+
+                filter_value = mongo_filter.get(key, {})
+                
+                filter_value["${}".format(operator)] = value
+                mongo_filter[key] = filter_value
+
+            result = collection.find(mongo_filter)
+        response = dict(status=True, result=self._create_entity_objects(result))        
+        return response

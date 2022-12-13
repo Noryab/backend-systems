@@ -4,11 +4,12 @@ import dataclasses
 
 @dataclasses.dataclass
 class Entity:
-    code: uuid.UUID
+    # code: uuid.UUID
+    code: str
     size: int
-    price: int
+    price: float
     longitude: float
-    latitude: float
+    latitude: float    
 
     @classmethod
     def from_dict(self, d):

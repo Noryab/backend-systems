@@ -6,29 +6,43 @@ class EntityDto:
     input_model = api.model(
         "InputModel",
         {
-            "dateLog": fields.DateTime(required=True, description="fecha: string"),
-            "idAction": fields.Integer(required=True, description="fecha: Integer"),
-            "user": fields.String(required=True, description="user: platfor user"),
-            "document": fields.Raw(),
+            "code": fields.DateTime(required=True, description="fecha: string"),
+            "size": fields.Float(required=True, description="fecha: Integer"),
+            "price": fields.Float(required=True, description="user: platfor user"),
+            "latitude": fields.Float(),
+            "longitude": fields.Float(),
+            "longitude": fields.Float(),
         },
     )
+    expected_input_model = api.model(
+        "ExpectedModel",
+        {            
+            "entities": fields.List(
+                fields.Nested(input_model, skip_none=True), required=False
+            ),
+        },
+    )
+
     output_model = api.model(
         "OutputModel",
         {
-            "error": fields.List(
+            "codes": fields.List(
                 fields.Integer(required=False, description="id error web catalog")
             ),
-            "exito": fields.List(
+            "fields": fields.List(
                 fields.Integer(required=False, description="id error web catalog"),
                 required=False,
             ),
         },
     )
-    input_user_action_logs_model = api.model(
-        "UserActionLogsModel",
+    response_model = api.model(
+        "ResponseModel",
         {
+            "status": fields.String(required=True, description="user: platfor user"),
+            "error": fields.String(required=True, description="user: platfor user"),
+            "message": fields.String(required=True, description="user: platfor user"),
             "data": fields.List(
-                fields.Nested(input_model, skip_none=True), required=True
+                fields.Nested(output_model, skip_none=True), required=True
             ),
         },
     )
